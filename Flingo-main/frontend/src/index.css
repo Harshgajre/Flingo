@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background-light text-text-primary-light font-inter antialiased;
+  }
+  
+  .dark body {
+    @apply bg-background-dark text-text-primary-dark;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card-light/80 backdrop-blur-md border border-border-light shadow-soft rounded-[24px];
+  }
+  
+  .dark .glass-card {
+    @apply bg-card-dark/80 border-border-dark;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary text-white font-medium hover:opacity-90 transition-opacity;
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* View Transitions for Dark Mode Toggle */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
