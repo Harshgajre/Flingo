@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'Flingo-main/mobile/**'
+      - '.github/workflows/build-apk.yml'
 
 jobs:
   build-apk:
@@ -47,7 +48,7 @@ jobs:
       - name: Build Release APK
         run: |
           cd android
-          ./gradlew assembleRelease --no-daemon
+          ./gradlew assembleRelease --no-daemon --stacktrace
 
       - name: Find APK file
         id: find-apk
@@ -60,6 +61,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: flingo-release-apk
-          path: Flingo-main/mobile/android/app/build/outputs/apk/release/*.apk
+          path: Flingo-main/mobile/android/app/build/outputs/apk/**/*.apk
           if-no-files-found: error
           retention-days: 30
